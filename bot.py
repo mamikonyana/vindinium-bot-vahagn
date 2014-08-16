@@ -6,21 +6,11 @@ from navigation import get_direction
 from navigation import find_path
 import random
 
-direction_to_action = {
-    (0, 0): 'Stay',
-    (0, 1): 'East',
-    (0, -1): 'West',
-    (1, 0): 'North',
-    (-1, 0): 'South',
-}
-
-
-class Bot:
-    actions = ['Stay', 'North', 'South', 'East', 'West']
-    dirs = ['North', 'South', 'East', 'West']
-
 
 class VahagnBot(Bot):
+    """
+    Simple bot that goes to the nearest mine, or to the nearest tavern if HP < 50.
+    """
     def move(self, state):
         self.game = Game(state)
         if self.game.player.life < 50:
