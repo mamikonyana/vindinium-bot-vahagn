@@ -19,11 +19,15 @@ class HeroTile:
         self.id = id
 
 class MineTile:
-    def __init__(self, heroId = None):
-        self.heroId = heroId
+    def __init__(self, heroId=None):
+        if heroId in ('-', None):
+            self.heroId = None
+        else:
+            self.heroId = int(heroId)
 
 class Game:
     def __init__(self, state):
+        self.player = Hero(state['hero'])
         self.state = state
         self.board = Board(state['game']['board'])
         self.heroes = [Hero(state['game']['heroes'][i]) for i in range(len(state['game']['heroes']))]
@@ -92,6 +96,8 @@ class Hero:
     def __init__(self, hero):
         self.name = hero['name']
         self.pos = hero['pos']
+        self.position = (hero['pos']['x'], hero['pos']['y'])
         self.life = hero['life']
         self.gold = hero['gold']
+        self.id = hero['id']
 
